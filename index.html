@@ -1,43 +1,391 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Download Launcher</title>
-<style>
-  body {
-    margin: 0;
-    padding: 0;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-image: url('https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.pcgamer.com%2Ffortnite-chapter-2-season-3-kicks-off-with-some-huge-changes%2F&psig=AOvVaw3Dd6q7onTiu0vkhrcJl2Pi&ust=1712005598315000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCPiXrv6zn4UDFQAAAAAdAAAAABAS');
-    background-size: cover;
-    background-position: center;
-    font-family: Arial, sans-serif;
-  }
-  
-  button {
-    padding: 10px 20px;
-    font-size: 18px;
-    border: none;
-    background-color: transparent;
-    color: white;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-  
-  button:hover {
-    background-color: blue;
-    transform: scale(1.05);
-  }
-</style>
-</head>
-<body>
-  <a href="https://github.com/PrivateUserTTV/ProjectNeonWEB/raw/main/Release.zip" target="_blank">
-    <button>Download Launcher</button>
-  </a>
-</body>
-</html>
+<html lang="en"><head>
+    <style>
+    
+    body, html {
+        height: 100%;
+        margin: 0;
+        overflow: hidden;
+    }
+    
+    #background-container {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        z-index: -1;
+        animation: cycleBackground 60s infinite;
+        background-size: cover;
+    }
+    
+    @keyframes cycleBackground {
+        0%, 50% {
+            background-image: url('https://raw.githubusercontent.com/PrivateUserFFR/AtmosMP-Home/main/homebackground.jpg');
+        }
+        50.1%, 100% {
+            background-image: url('https://raw.githubusercontent.com/PrivateUserFFR/AtmosMP-Home/main/homebackground.jpg');
+        }
+    }
+    
+    #change-button {
+        position: fixed;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: white;
+        border: none;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        cursor: pointer;
+        z-index: 1;
+    }
+    
+    </style>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>AtmosMP | Home </title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background-image: url('https://raw.githubusercontent.com/AtmosMP/AtmosMP/main/wp5862204.jpg');
+                background-size: cover;
+                background-repeat: no-repeat;
+                background-position: center center;
+                margin: 0;
+                padding: 0;
+                display: flex;
+                height: 100vh;
+                justify-content: center;
+                align-items: center;
+                color: white;
+                position: relative;
+            }
+    
+            .container {
+                background-color: rgba(0, 0, 0, 0.7);
+                padding: 40px;
+                border-radius: 5px;
+                text-align: center;
+            }
+    
+            h1 {
+                margin-top: 0;
+                font-size: 3rem;
+                margin-bottom: 20px;
+            }
+    
+            button {
+                background-color: #007BFF;
+                border: none;
+                color: white;
+                padding: 15px 30px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin: 10px 2px;
+                cursor: pointer;
+                border-radius: 5px;
+                transition: background-color 0.3s;
+            }
+    
+            button:hover {
+                background-color: #0056b3;
+            }
+    
+            .discord {
+                background-color: #7289da;
+            }
+    
+            .discord:hover {
+                background-color: #5b6eae;
+            }
+    
+            /* Login and Panel related styles */
+            .admin-login-btn, .panel-btn {
+                position: absolute;
+                top: 20px;
+            }
+    
+            .admin-login-btn {
+                right: 100000px;  
+            }
+    
+            .panel-btn {
+                right: 20px;
+                display: none;  /* Hidden initially */
+            }
+    
+            .login-container, .panel-container {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.7);
+                display: none;
+                justify-content: center;
+                align-items: center;
+            }
+    
+            .login-box, .panel-box {
+                background-color: #fff;
+                padding: 30px;
+                border-radius: 10px;
+                width: 320px;
+                transform: scale(0);
+                transition: transform 0.3s;
+                box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+                position: relative;
+            }
+    
+            .login-box.active, .panel-box.active {
+                transform: scale(1);
+            }
+    
+            .login-box input, .panel-box input {
+                width: 100%;
+                padding: 10px;
+                margin-bottom: 20px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+            }
+    
+            .login-box h2, .panel-box h2 {
+                margin-top: 0;
+                margin-bottom: 20px;
+                color: #333;
+            }
+    
+            .login-box button.close-btn, .panel-box button.close-btn {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                cursor: pointer;
+                font-size: 24px;
+                background: none;
+                border: none;
+                color: #aaa;
+            }
+    
+            .login-box button.close-btn:hover, .panel-box button.close-btn:hover {
+                color: #777;
+            }
+    
+            .panel-option {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 10px 0;
+                border-bottom: 1px solid #e1e1e1;
+                margin-bottom: 20px;
+            }
+    
+            .panel-option:last-child {
+                border-bottom: none;
+            }
+    
+            .panel-option label {
+                font-weight: bold;
+            }
+        </style>
+    </head>
+    
+    <body>
+    
+    <div id="background-container"></div>
+    <button id="change-button"></button>
+    
+    
+        <div class="container">
+            <h1>AtmosMP</h1>
+            <button onclick="downloadLink()">Download 12.41</button>
+            <button class="discord" onclick="window.location.href='https://discord.gg/nDPVn9M8Cj'">Discord</button>
+        </div>
+    
+        <button class="admin-login-btn" id="adminLoginBtn" onclick="showLogin()" style="display: block;">Admin Login</button>
+        <button class="panel-btn" id="panelBtn" onclick="showPanel()" style="display: none;">Panel</button>
+    
+        <div class="login-container" id="loginContainer">
+            <div class="login-box" id="loginBox">
+                <button class="close-btn" onclick="hideLogin()">×</button>
+                <h2>Admin Login</h2>
+                <input type="text" id="username" placeholder="Username">
+                <input type="password" id="password" placeholder="Password">
+                <button onclick="checkLogin()">Login</button>
+                <p id="loginMessage"></p>
+            </div>
+        </div>
+    
+        <div class="panel-container" id="panelContainer">
+            <div class="panel-box" id="panelBox">
+                <button class="close-btn" onclick="hidePanel()">×</button>
+                <h2>Admin Panel</h2>
+                <div class="panel-option">
+                    <label>Option 1:</label>
+                    <input type="text" placeholder="Placeholder">
+                </div>
+                <div class="panel-option">
+                    <label>Option 2:</label>
+                    <input type="text" placeholder="Placeholder">
+                </div>
+            </div>
+        </div>
+    
+    
+      
+        <script>
+            function showLogin() {
+                document.getElementById('loginContainer').style.display = 'flex';
+                setTimeout(function() {
+                    document.getElementById('loginBox').classList.add('active');
+                }, 50); // Small delay to ensure the container is visible
+            }
+    
+            function hideLogin() {
+                document.getElementById('loginBox').classList.remove('active');
+                setTimeout(function() {
+                    document.getElementById('loginContainer').style.display = 'none';
+                }, 300); // Delay equal to the transition duration
+            }
+    
+            function showPanel() {
+                document.getElementById('panelContainer').style.display = 'flex';
+                setTimeout(function() {
+                    document.getElementById('panelBox').classList.add('active');
+                }, 50); // Small delay to ensure the container is visible
+            }
+    
+            function hidePanel() {
+                document.getElementById('panelBox').classList.remove('active');
+                setTimeout(function() {
+                    document.getElementById('panelContainer').style.display = 'none';
+                }, 300); // Delay equal to the transition duration
+            }
+    
+            function checkLogin() {
+                var username = document.getElementById('username').value;
+                var password = document.getElementById('password').value;
+                var message = document.getElementById('loginMessage');
+                var adminBtn = document.getElementById('adminLoginBtn');
+                var panelBtn = document.getElementById('panelBtn');
+    
+                if (username === "Admin" && password === "Test!") {
+                    message.innerHTML = "Successfully logged in!";
+                    message.style.color = "green";
+                    adminBtn.style.display = "none";  // Hide the 'Admin Login' button
+                    panelBtn.style.display = "block";  // Show the 'Panel' button
+                    setTimeout(hideLogin, 1500);  // Close the login GUI after 1.5 seconds
+                } else {
+                    message.innerHTML = "Invalid credentials!";
+                    message.style.color = "red";
+                }
+            }
+        </script>
+    
+    <!-- Cookie Handling Script -->
+    <script>
+        function setCookie(cname, cvalue, exdays) {
+            var d = new Date();
+            d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+            var expires = "expires=" + d.toUTCString();
+            document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+        }
+    
+        function getCookie(cname) {
+            var name = cname + "=";
+            var decodedCookie = decodeURIComponent(document.cookie);
+            var ca = decodedCookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length);
+                }
+            }
+            return "";
+        }
+    
+        function checkCookie() {
+            var user = getCookie("username");
+            if (user == "Admin") {
+                document.getElementById('adminLoginBtn').style.display = "none";
+                document.getElementById('panelBtn').style.display = "block";
+            } else {
+                document.getElementById('adminLoginBtn').style.display = "block";
+                document.getElementById('panelBtn').style.display = "none";
+            }
+        }
+    
+        function signOut() {
+            setCookie("username", "", -1);  // Delete the cookie
+            document.getElementById('adminLoginBtn').style.display = "block";
+            document.getElementById('panelBtn').style.display = "none";
+            hidePanel();
+        }
+    
+        function checkLogin() {
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+            var message = document.getElementById('loginMessage');
+    
+            if (username === "Admin" && password === "Test!") {
+                message.innerHTML = "Successfully logged in!";
+                message.style.color = "green";
+                setCookie("username", "Admin", 7);  // Set a cookie for 7 days
+                setTimeout(function() {
+                    document.getElementById('adminLoginBtn').style.display = "none";  // Hide the 'Admin Login' button
+                    document.getElementById('panelBtn').style.display = "block";  // Show the 'Panel' button
+                    hideLogin();
+                }, 1500);
+            } else {
+                message.innerHTML = "Invalid credentials!";
+                message.style.color = "red";
+            }
+        }
+    
+        // Call the checkCookie function when the page loads
+        checkCookie();
+    
+        var backgroundMusic = document.getElementById('background-music');
+        backgroundMusic.play();
+      
+    </script>
+    <script>
+    
+      
+    
+    document.getElementById('change-button').addEventListener('click', function() {
+        let container = document.getElementById('background-container');
+        let currentImage = getComputedStyle(container).backgroundImage;
+    
+        if (currentImage.includes('website.jpg')) {
+            container.style.backgroundImage = "url('http://135.125.189.178:81/eon.jpg')";
+        } else {
+            container.style.backgroundImage = "url('http://135.125.189.178:81/website.jpg')";
+        }
+    });
+    
+    // Automatically change the background every 30 seconds
+    setInterval(function() {
+        let button = document.getElementById('change-button');
+        button.click();
+    }, 30000);
+    
+    </script>
+    
+    
+    
+    
+    <script>
+        function downloadLink() {
+            var links = [
+                "https://cdn.fnbuilds.services/Fortnite%2012.41.zip",
+                "https://cdn.fnbuilds.services/Fortnite%2012.41.zip"
+            ];
+            var randomLink = links[Math.floor(Math.random() * links.length)];
+            window.location.href = randomLink;
+        }
+    </script>
+    </body></html>
